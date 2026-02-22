@@ -2,6 +2,7 @@
 
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import type { GitHubRepo } from "@/lib/github";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -9,14 +10,14 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.12 } } };
 
-const PROJECTS = [
+// Manually curated featured projects — rich descriptions, stay as-is.
+const FEATURED_PROJECTS = [
   {
     title: "Google Classroom MCP Server",
     description:
       "Model Context Protocol server enabling AI assistants to integrate with Google Classroom API for educational workflow automation. Configured OAuth2 with Google Cloud Platform, architected a TypeScript API wrapper supporting 8+ operations including course management, assignment creation, and submission monitoring.",
     tags: ["TypeScript", "MCP", "Google Classroom API", "OAuth2", "Node.js", "GCP"],
     github: "https://github.com/SalShah20/classroom_mcp",
-    featured: true,
     number: "01",
   },
   {
@@ -25,26 +26,25 @@ const PROJECTS = [
       "Pioneered an AR mobile app for task management with interactive 3D elements using Unity and C# in a 48-hour hackathon. Spearheaded a team of 4 developers, delivered MVP, and secured a $1,000 development grant through a pitch to industry judges.",
     tags: ["Unity", "C#", "AR Development", "Mobile", "Hackathon"],
     github: "https://github.com/SalShah20",
-    featured: true,
     number: "02",
   },
+];
+
+// Manually curated "other" projects — shown first in the grid, above GitHub repos.
+const MANUAL_OTHER_PROJECTS = [
   {
     title: "AI-Powered Job Application Assistant",
     description:
       "Automation tool using OpenAI API and Selenium to generate personalized cold emails for startup applications from VC portfolio websites. Excel-based tracking with 100+ startup data extraction and automated ChromeDriver integration.",
     tags: ["Python", "OpenAI API", "Selenium", "Automation", "Web Scraping"],
     github: "https://github.com/SalShah20",
-    featured: false,
-    number: "03",
   },
   {
     title: "PASCAL to MIPS Assembly Compiler",
     description:
-      "Compiler translating PASCAL source code to MIPS assembly with full lexical analysis, parsing, and code generation stages. Integrated comprehensive error handling and recovery mechanisms for a robust compilation process.",
+      "Compiler translating PASCAL source code to MIPS assembly with full lexical analysis, parsing, and code generation stages. Optimized parsing logic for improved compilation efficiency and robust error handling.",
     tags: ["C", "Compilers", "MIPS", "PASCAL", "Systems Programming"],
-    github: "https://github.com/SalShah20",
-    featured: false,
-    number: "04",
+    github: "https://github.com/SalShah20/atcs-compilers",
   },
   {
     title: "Babeltrace 2 C Filter Plugin",
@@ -52,10 +52,54 @@ const PROJECTS = [
       "High-performance C filter plugin for Babeltrace 2 replacing a legacy Python decoder, enabling inline IPv4/IPv6/MAC address decoding with a 9x reduction in trace processing runtime.",
     tags: ["C", "Babeltrace 2", "Networking", "Performance", "ArcOS"],
     github: "https://github.com/SalShah20",
-    featured: false,
-    number: "05",
+  },
+  {
+    title: "Robotic Arm",
+    description:
+      "Programmed a robotic arm for precise motion control using inverse kinematics. Integrated real-time sensor feedback to continuously refine movement accuracy during operation.",
+    tags: ["Robotics", "Inverse Kinematics", "Sensors", "Embedded Systems"],
+    github: "https://github.com/SalShah20/atcs-kinematics",
+  },
+  {
+    title: "Image Recognition Neural Network",
+    description:
+      "Implemented an N-layer neural network from scratch for hand gesture recognition using backpropagation. Improved model accuracy by tuning activation functions and layer configurations.",
+    tags: ["Python", "Neural Networks", "Backpropagation", "Machine Learning"],
+    github: "https://github.com/SalShah20/atcs-neuralnetworks",
+  },
+  {
+    title: "Smart Plant Monitoring System",
+    description:
+      "Embedded system using a PIC24 microcontroller to measure soil moisture, light (TSL2561), and temperature/humidity (DHT11) and compute a \"Plant Comfort Index.\" Real-time feedback via RGB LEDs and an OLED display indicates optimal, moderate, or poor plant conditions. In progress.",
+    tags: ["PIC24", "Embedded C", "I2C", "OLED", "Sensors", "Analog/Digital"],
+    github: "https://github.com/SalShah20",
+  },
+  {
+    title: "4-bit Computer",
+    description:
+      "Designed and simulated a 4-bit computer from scratch with a full ALU, registers, control unit, and memory interface. Implemented and tested arithmetic operations and basic instruction execution.",
+    tags: ["Computer Architecture", "ALU", "Vivado", "Digital Logic", "FPGA"],
   },
 ];
+
+// Repo names already featured manually — exclude from auto-populated list
+const FEATURED_REPO_NAMES = new Set([
+  "classroom_mcp",
+  "atcs-kinematics",
+  "atcs-neuralnetworks",
+  "atcs-compilers",
+]);
+
+// Repos to hide even if public (forks, boilerplate, etc.)
+const REPO_DENYLIST = new Set([
+  "SalShah20",       // profile readme repo
+  "portfolio-site",  // redundant — visitor is already on it
+  "apcsds",
+]);
+
+interface ProjectsProps {
+  githubRepos?: GitHubRepo[];
+}
 
 function ExternalIcon() {
   return (
@@ -73,12 +117,85 @@ function GitHubIcon() {
   );
 }
 
-export default function Projects() {
+interface OtherProject {
+  title: string;
+  description: string;
+  tags: string[];
+  github?: string;
+  isLive?: boolean;
+}
+
+function OtherProjectCard({ project }: { project: OtherProject }) {
+  return (
+    <motion.div
+      variants={fadeUp}
+      className="group p-6 rounded-2xl border border-[#1a3248] bg-[#0d1e30] card-hover flex flex-col gap-4"
+    >
+      <div className="flex items-center justify-between">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+          <rect width="36" height="36" rx="8" fill="rgba(56,189,248,0.08)" />
+          <path d="M10 18h16M18 10v16" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" />
+        </svg>
+        {project.github && (
+          <a
+            href={project.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#555] hover:text-[#38bdf8] transition-colors"
+            aria-label={project.isLive ? "View on GitHub" : "GitHub"}
+          >
+            <ExternalIcon />
+          </a>
+        )}
+      </div>
+      <div>
+        <h3 className="text-[#e2eaf4] font-bold mb-2">{project.title}</h3>
+        <p className="text-[#6b8ba4] text-sm leading-relaxed">{project.description}</p>
+      </div>
+      <div className="flex flex-wrap gap-2 mt-auto">
+        {project.tags.map((tag) => (
+          <span key={tag} className="tag-pill">{tag}</span>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
+export default function Projects({ githubRepos = [] }: ProjectsProps) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  const featured = PROJECTS.filter((p) => p.featured);
-  const other = PROJECTS.filter((p) => !p.featured);
+  // Build list of manual other project titles for dedup
+  const manualTitles = new Set(
+    MANUAL_OTHER_PROJECTS.map((p) => p.title.toLowerCase())
+  );
+
+  // Auto-populated repos from GitHub: exclude featured, denylisted, and manual ones
+  const autoRepos = githubRepos
+    .filter(
+      (repo) =>
+        !FEATURED_REPO_NAMES.has(repo.name) &&
+        !REPO_DENYLIST.has(repo.name) &&
+        repo.description // only repos with a description
+    )
+    .filter((repo) => !manualTitles.has(repo.name.toLowerCase()))
+    .slice(0, 6); // cap at 6 auto repos
+
+  const autoProjects: OtherProject[] = autoRepos.map((repo) => ({
+    title: repo.name
+      .replace(/-/g, " ")
+      .replace(/_/g, " ")
+      .replace(/\b\w/g, (c) => c.toUpperCase()),
+    description: repo.description ?? "",
+    tags: [
+      ...(repo.language ? [repo.language] : []),
+      ...repo.topics.slice(0, 3),
+    ],
+    github: repo.html_url,
+    isLive: true,
+  }));
+
+  const otherProjects: OtherProject[] = [...MANUAL_OTHER_PROJECTS, ...autoProjects];
 
   return (
     <section id="projects" className="relative py-32 overflow-hidden" ref={ref}>
@@ -104,7 +221,7 @@ export default function Projects() {
 
           {/* Featured projects */}
           <div className="flex flex-col gap-8 mb-12">
-            {featured.map((project) => (
+            {FEATURED_PROJECTS.map((project) => (
               <motion.div
                 key={project.title}
                 variants={fadeUp}
@@ -161,36 +278,8 @@ export default function Projects() {
             Other Noteworthy Projects
           </motion.p>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {other.map((project) => (
-              <motion.div
-                key={project.title}
-                variants={fadeUp}
-                className="group p-6 rounded-2xl border border-[#1a3248] bg-[#0d1e30] card-hover flex flex-col gap-4"
-              >
-                <div className="flex items-center justify-between">
-                  <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-                    <rect width="36" height="36" rx="8" fill="rgba(56,189,248,0.08)" />
-                    <path d="M10 18h16M18 10v16" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" />
-                  </svg>
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#555] hover:text-[#38bdf8] transition-colors"
-                  >
-                    <ExternalIcon />
-                  </a>
-                </div>
-                <div>
-                  <h3 className="text-[#e2eaf4] font-bold mb-2">{project.title}</h3>
-                  <p className="text-[#6b8ba4] text-sm leading-relaxed">{project.description}</p>
-                </div>
-                <div className="flex flex-wrap gap-2 mt-auto">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="tag-pill">{tag}</span>
-                  ))}
-                </div>
-              </motion.div>
+            {otherProjects.map((project) => (
+              <OtherProjectCard key={project.title} project={project} />
             ))}
           </div>
 

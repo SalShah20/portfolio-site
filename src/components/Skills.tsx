@@ -9,32 +9,53 @@ const fadeUp = {
 };
 const stagger = { hidden: {}, show: { transition: { staggerChildren: 0.1 } } };
 
-const SKILL_GROUPS = [
+// Manually curated base skills — always shown, ordered intentionally.
+// GitHub-detected languages are merged into the Languages category automatically.
+const BASE_SKILL_GROUPS = [
   {
     category: "Languages",
     icon: "{ }",
-    skills: ["C", "C++", "Python", "Java", "JavaScript", "TypeScript", "HTML/CSS"],
+    skills: ["C", "C++", "Python", "Java", "JavaScript", "TypeScript", "HTML/CSS", "LISP", "C#"],
   },
   {
     category: "Frameworks & Tools",
     icon: "⚙",
-    skills: ["React", "Node.js", "Unity", "Git", "Linux", "REST APIs", "MATLAB"],
+    skills: ["React", "Next.js", "Node.js", "Unity", "Git", "Linux", "REST APIs", "MATLAB", "Full-Stack Development"],
   },
   {
     category: "Systems & Databases",
     icon: "⚡",
-    skills: ["Data Structures & Algorithms", "Networking Protocols", "SQL", "OS Internals"],
+    skills: ["Data Structures & Algorithms", "OOP", "System Design", "Networking Protocols", "Embedded Systems", "SQL"],
   },
   {
     category: "Specialized",
     icon: "◈",
-    skills: ["YANG", "ConfD", "Babeltrace 2", "OAuth2", "AR Development", "MCP"],
+    skills: ["YANG", "ConfD", "Babeltrace 2", "OAuth2", "AR Development", "MCP", "Vivado", "FPGA", "I2C", "LaTeX", "Fusion 360"],
   },
 ];
 
-export default function Skills() {
+interface SkillsProps {
+  githubLanguages?: string[];
+}
+
+export default function Skills({ githubLanguages = [] }: SkillsProps) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
+
+  // Merge GitHub-detected languages into the Languages group.
+  // Preserve existing order, append new ones at the end.
+  const skillGroups = BASE_SKILL_GROUPS.map((group) => {
+    if (group.category !== "Languages") return group;
+
+    const existing = new Set(group.skills.map((s) => s.toLowerCase()));
+    const newLangs = githubLanguages.filter(
+      (lang) => !existing.has(lang.toLowerCase())
+    );
+    return {
+      ...group,
+      skills: [...group.skills, ...newLangs],
+    };
+  });
 
   return (
     <section id="skills" className="relative py-32 overflow-hidden" ref={ref}>
@@ -59,7 +80,7 @@ export default function Skills() {
           </motion.p>
 
           <div className="grid sm:grid-cols-2 gap-6">
-            {SKILL_GROUPS.map((group) => (
+            {skillGroups.map((group) => (
               <motion.div
                 key={group.category}
                 variants={fadeUp}
