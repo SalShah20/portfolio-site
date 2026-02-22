@@ -64,7 +64,7 @@ const MANUAL_OTHER_PROJECTS = [
     title: "Image Recognition Neural Network",
     description:
       "Implemented an N-layer neural network from scratch for hand gesture recognition using backpropagation. Improved model accuracy by tuning activation functions and layer configurations.",
-    tags: ["Python", "Neural Networks", "Backpropagation", "Machine Learning"],
+    tags: ["Java", "Neural Networks", "Backpropagation", "Machine Learning"],
     github: "https://github.com/SalShah20/atcs-neuralnetworks",
   },
   {
