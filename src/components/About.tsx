@@ -57,10 +57,10 @@ export default function About() {
                 className="text-[#6b8ba4] leading-relaxed mb-5 text-lg"
               >
                 I&apos;m a Computer Engineering student at the University of Minnesota with
-                a proven track record in systems programming, API integration, and full-stack
+                hands-on experience in systems programming, embedded hardware, and full-stack
                 development. I specialize in C/C++, Python, and TypeScript, and I love
-                understanding how things work at every layer — from network protocols to
-                user-facing applications.
+                understanding how things work at every layer — from bare-metal microcontrollers
+                to AI-powered applications.
               </motion.p>
 
               <motion.p

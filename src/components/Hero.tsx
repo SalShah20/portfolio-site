@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 
-const WORDS = ["systems thinker.", "problem solver.", "code builder.", "network debugger.", "STEM advocate."];
+const WORDS = ["systems thinker.", "problem solver.", "code builder.", "hardware tinkerer.", "STEM advocate."];
 
 function TypewriterText() {
   const ref = useRef<HTMLSpanElement>(null);
@@ -168,8 +168,8 @@ export default function Hero() {
           >
             Computer Engineering student at the{" "}
             <span className="text-[#e2eaf4]">University of Minnesota</span>.
-            I build performant systems and elegant interfaces — from low-level network
-            protocols to full-stack web applications.
+            I build across the stack — from embedded hardware and systems programming
+            to AI tooling and full-stack applications.
           </motion.p>
 
             {/* CTAs */}
