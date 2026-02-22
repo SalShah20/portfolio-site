@@ -43,7 +43,7 @@ const MANUAL_OTHER_PROJECTS = [
     title: "PASCAL to MIPS Assembly Compiler",
     description:
       "Compiler translating PASCAL source code to MIPS assembly with full lexical analysis, parsing, and code generation stages. Optimized parsing logic for improved compilation efficiency and robust error handling.",
-    tags: ["C", "Compilers", "MIPS", "PASCAL", "Systems Programming"],
+    tags: ["Java", "Compilers", "MIPS", "PASCAL", "Systems Programming"],
     github: "https://github.com/SalShah20/atcs-compilers",
   },
   {
