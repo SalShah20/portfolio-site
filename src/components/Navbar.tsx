@@ -35,8 +35,11 @@ export default function Navbar() {
       >
         <div className="max-w-5xl mx-auto px-6 md:px-12 lg:px-20 h-16 flex items-center justify-between">
           {/* Logo */}
-          <a href="#home" className="font-mono font-bold text-[#38bdf8] text-lg tracking-tight hover:opacity-80 transition-opacity">
-            SS<span className="text-[#e2eaf4]">.</span>
+          <a href="#home" className="hover:opacity-80 transition-opacity" aria-label="Home">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <path d="M18 3 L32 11 L32 25 L18 33 L4 25 L4 11 Z" stroke="#38bdf8" strokeWidth="1.5" fill="rgba(56,189,248,0.10)" />
+              <text x="18" y="18" textAnchor="middle" dominantBaseline="central" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">SS</text>
+            </svg>
           </a>
 
           {/* Desktop nav */}
