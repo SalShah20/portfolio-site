@@ -92,9 +92,10 @@ const FEATURED_REPO_NAMES = new Set([
 
 // Repos to hide even if public (forks, boilerplate, etc.)
 const REPO_DENYLIST = new Set([
-  "SalShah20",       // profile readme repo
-  "portfolio-site",  // redundant — visitor is already on it
+  "SalShah20",           // profile readme repo
+  "portfolio-site",      // redundant — visitor is already on it
   "apcsds",
+  "atcs-expertsystems",  // dated project, excluded intentionally
 ]);
 
 interface ProjectsProps {
