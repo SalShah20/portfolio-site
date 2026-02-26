@@ -15,16 +15,16 @@ const FEATURED_PROJECTS = [
   {
     title: "Google Classroom MCP Server",
     description:
-      "Model Context Protocol server enabling AI assistants to integrate with Google Classroom API for educational workflow automation. Configured OAuth2 with Google Cloud Platform, architected a TypeScript API wrapper supporting 8+ operations including course management, assignment creation, and submission monitoring.",
-    tags: ["TypeScript", "MCP", "Google Classroom API", "OAuth2", "Node.js", "GCP"],
+      "A Model Context Protocol server that bridges AI assistants with the Google Classroom API. It facilitates automated educational workflows, including real-time course management, assignment distribution, and submission tracking via a robust TypeScript-based OAuth2 architecture.",
+    tags: ["TypeScript", "Model Context Protocol", "Google Cloud Platform", "OAuth2", "Node.js", "REST API"],
     github: "https://github.com/SalShah20/classroom_mcp",
     number: "01",
   },
   {
-    title: "Chasing Stars — AR Productivity App",
+    title: "Chasing Stars — AR Productivity",
     description:
-      "Pioneered an AR mobile app for task management with interactive 3D elements using Unity and C# in a 48-hour hackathon. Spearheaded a team of 4 developers, delivered MVP, and secured a $1,000 development grant through a pitch to industry judges.",
-    tags: ["Unity", "C#", "AR Development", "Mobile", "Hackathon"],
+      "An augmented reality mobile application designed to gamify task management. Developed using Unity and C#, the app features interactive 3D environments to enhance user engagement. Secured a $1,000 development grant after winning a 48-hour hackathon.",
+    tags: ["Unity 3D", "C#", "AR Foundation", "Mobile Development", "Productivity"],
     github: "https://github.com/SalShah20",
     number: "02",
   },
@@ -33,52 +33,50 @@ const FEATURED_PROJECTS = [
 // Manually curated "other" projects — shown first in the grid, above GitHub repos.
 const MANUAL_OTHER_PROJECTS = [
   {
-    title: "AI-Powered Job Application Assistant",
+    title: "AI Job Application Assistant",
     description:
-      "Automation tool using OpenAI API and Selenium to generate personalized cold emails for startup applications from VC portfolio websites. Excel-based tracking with 100+ startup data extraction and automated ChromeDriver integration.",
-    tags: ["Python", "OpenAI API", "Selenium", "Automation", "Web Scraping"],
+      "An automation engine that leverages OpenAI and Selenium to streamline the job application process. It extracts startup data from VC portfolios and generates highly personalized outreach emails, significantly increasing response rates.",
+    tags: ["Python", "OpenAI API", "Selenium", "Web Scraping", "Automation"],
     github: "https://github.com/SalShah20",
   },
   {
-    title: "PASCAL to MIPS Assembly Compiler",
+    title: "PASCAL to MIPS Compiler",
     description:
-      "Compiler translating PASCAL source code to MIPS assembly with full lexical analysis, parsing, and code generation stages. Optimized parsing logic for improved compilation efficiency and robust error handling.",
-    tags: ["Java", "Compilers", "MIPS", "PASCAL", "Systems Programming"],
+      "A complete multi-stage compiler built in Java that translates PASCAL source code into MIPS assembly. Implements complex lexical analysis, recursive descent parsing, and optimized code generation for efficient execution.",
+    tags: ["Java", "Compiler Design", "MIPS Assembly", "PASCAL", "Systems Programming"],
     github: "https://github.com/SalShah20/atcs-compilers",
   },
+    {
+      title: "Babeltrace 2 C Filter Plugin",
+      description:
+        "A high-performance C plugin for the Babeltrace 2 framework designed for low-latency network trace decoding. Replaced a legacy Python implementation, achieving a 9x performance gain in processing IPv4/v6 and MAC address data.",
+      tags: ["C", "Babeltrace 2", "Network Protocols", "Optimization", "Low-level Dev"],
+    },
   {
-    title: "Babeltrace 2 C Filter Plugin",
+    title: "Robotic Arm Control System",
     description:
-      "High-performance C filter plugin for Babeltrace 2 replacing a legacy Python decoder, enabling inline IPv4/IPv6/MAC address decoding with a 9x reduction in trace processing runtime.",
-    tags: ["C", "Babeltrace 2", "Networking", "Performance", "ArcOS"],
-    github: "https://github.com/SalShah20",
-  },
-  {
-    title: "Robotic Arm",
-    description:
-      "Programmed a robotic arm for precise motion control using inverse kinematics. Integrated real-time sensor feedback to continuously refine movement accuracy during operation.",
-    tags: ["Robotics", "Inverse Kinematics", "Sensors", "Embedded Systems"],
+      "Software for a multi-axis robotic arm utilizing inverse kinematics for high-precision spatial positioning. Features a real-time closed-loop feedback system using sensor data to ensure smooth and accurate movement.",
+    tags: ["Robotics", "Embedded Systems", "Control Theory", "Sensors", "C++"],
     github: "https://github.com/SalShah20/atcs-kinematics",
   },
   {
-    title: "Image Recognition Neural Network",
+    title: "Neural Network from Scratch",
     description:
-      "Implemented an N-layer neural network from scratch for hand gesture recognition using backpropagation. Improved model accuracy by tuning activation functions and layer configurations.",
-    tags: ["Java", "Neural Networks", "Backpropagation", "Machine Learning"],
+      "An N-layer neural network implementation in Java focused on hand gesture recognition. Built without high-level ML libraries to demonstrate backpropagation, gradient descent, and activation function tuning from first principles.",
+    tags: ["Java", "Machine Learning", "Neural Networks", "Computer Vision", "Math"],
     github: "https://github.com/SalShah20/atcs-neuralnetworks",
   },
+    {
+      title: "Smart Plant Monitor",
+      description:
+        "An IoT embedded system powered by a PIC24 microcontroller. Monitors environmental metrics like soil moisture and light intensity to compute a 'Plant Comfort Index', displayed via real-time RGB LED indicators and an OLED screen.",
+      tags: ["PIC24 Microcontroller", "Embedded C", "I2C/SPI", "IoT", "Sensors"],
+    },
   {
-    title: "Smart Plant Monitoring System",
+    title: "4-bit Computer Architecture",
     description:
-      "Embedded system using a PIC24 microcontroller to measure soil moisture, light (TSL2561), and temperature/humidity (DHT11) and compute a \"Plant Comfort Index.\" Real-time feedback via RGB LEDs and an OLED display indicates optimal, moderate, or poor plant conditions. In progress.",
-    tags: ["PIC24", "Embedded C", "I2C", "OLED", "Sensors", "Analog/Digital"],
-    github: "https://github.com/SalShah20",
-  },
-  {
-    title: "4-bit Computer",
-    description:
-      "Designed and simulated a 4-bit computer from scratch with a full ALU, registers, control unit, and memory interface. Implemented and tested arithmetic operations and basic instruction execution.",
-    tags: ["Computer Architecture", "ALU", "Vivado", "Digital Logic", "FPGA"],
+      "A ground-up simulation of a 4-bit computer architecture, including a custom ALU, registers, and control unit. Designed and verified using digital logic principles to execute fundamental machine instructions.",
+    tags: ["Computer Architecture", "Digital Logic", "Vivado", "Verilog", "FPGA"],
   },
 ];
 
@@ -93,9 +91,9 @@ const FEATURED_REPO_NAMES = new Set([
 // Repos to hide even if public (forks, boilerplate, etc.)
 const REPO_DENYLIST = new Set([
   "SalShah20",           // profile readme repo
-  "portfolio-site",      // redundant — visitor is already on it
+  "portfolio-site", 
   "apcsds",
-  "atcs-expertsystems",  // dated project, excluded intentionally
+  "atcs-expertsystems",
 ]);
 
 interface ProjectsProps {
@@ -166,7 +164,7 @@ export default function Projects({ githubRepos = [] }: ProjectsProps) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Build list of manual other project titles for dedup
+  // Build list of manual other project titles
   const manualTitles = new Set(
     MANUAL_OTHER_PROJECTS.map((p) => p.title.toLowerCase())
   );
